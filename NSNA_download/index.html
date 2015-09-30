@@ -1,0 +1,159 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Script-Type" content="text/javascript">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>NEWS SOURCE: EXPORT</title>
+
+  <link rel="stylesheet" href="lib/jquery-ui.css">
+  <link rel="stylesheet" href="style.css">
+
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <script type="text/javascript" src="lib/d3.v3.min.js"></script>
+  <script type="text/javascript" src="lib/spin.min.js"></script>
+  <script type="text/javascript" src="lib/moment-with-langs.min.js"></script>
+  <script type="text/javascript" src="lib/jquery.multiselect.js"></script>
+  <script type="text/javascript" src="lib/jquery.multiselect.filter.js"></script>
+
+  <style>
+  html, body, div, span, applet, object, iframe,
+  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+  a, abbr, acronym, address, big, cite, code,
+  del, dfn, em, font, img, ins, kbd, q, s, samp,
+  small, strike, strong, sub, sup, tt, var,
+  b, u, i, center,
+  dl, dt, dd, ol, ul, li,
+  fieldset, form, label, legend,
+  table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+  }
+  body {
+    line-height: 1;
+  }
+  ol, ul {
+    list-style: none;
+  }
+  blockquote, q {
+    quotes: none;
+  }
+  blockquote:before, blockquote:after,
+  q:before, q:after {
+    content: '';
+    content: none;
+  }
+
+  /* remember to define focus styles! */
+  :focus {
+    outline: 0;
+  }
+
+  /* remember to highlight inserts somehow! */
+  ins {
+    text-decoration: none;
+  }
+  del {
+    text-decoration: line-through;
+  }
+
+  /* tables still need 'cellspacing="0"' in the markup */
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  div.box {
+    display:block;
+    overflow:auto;
+  }
+
+  /* ------------------------------------------------------------------------ */
+
+  </style>
+
+</head>
+
+<body>
+  <div id="container" class="box">
+    <div id="header" class="box">
+     <div id="title" align="left" style="padding-left:25px; padding-top:10px; font-weight: bold; margin-bottom: 10px; font-size: 24px"> News Source Data Export</div>
+      <div id="search" align="left">
+        <input type="text" id="q_keyword" placeholder="키워드를 입력하세요." >
+        
+
+        <!-- <input type="text" id="q_date_begin"> -->
+        <!-- <input type="text" id="q_date_end"> -->
+        <!-- <button type="button" id="q_update">search</button> -->
+
+      </div>
+<div id="excel_file_1" class="excel_icon" style="vertical-align: middle">article</div>
+<div id="excel_file_2" class="excel_icon" style="vertical-align: middle">quote</div>
+<div id="excel_file_3" class="excel_icon" style="vertical-align: middle">degree</div>
+<div id="period" ><select id="period_select">
+  <option value="1">1day</option>
+  <option value="2">1week</option>
+  <option value="3">2week</option>
+</select></div>
+
+    </div>
+
+    <div id="right_panel" class="box">
+      
+      <div class="panel_line"></div>
+      <div id="timeline_controller_container" class="box">
+        <div class="date_picker_container box">
+          <div class="date_picker_indicator panel_indicator">검색기간 설정</div>
+          <div class="date_picker_input">
+            <div class="date_range_arrow left" id="prev_date_range_auto"></div>
+            <div class="date_range_arrow left" id="prev_date_range_one"></div>
+            <!-- <div class="calendar_icon box"></div>  -->
+            <input type="text" id="date_picker_begin" class='date_picker_input_text'>
+            <div class="date_picker_dash box"></div>
+            <!-- <div class="calendar_icon box"></div>  -->
+            <input type="text" id="date_picker_end" class='date_picker_input_text'>
+            <div class="date_range_arrow right" id="next_date_range_one"></div>
+            <div class="date_range_arrow right" id="next_date_range_auto"></div>
+          </div>
+        </div>
+        <!-- <div id="timeline_controller_button" class="box"><p>적용하기</p></div> -->
+      </div>
+      <div class="panel_line"></div>
+      <div id="select_provider_container" class="box">
+        <div id="select_provider_indicator" class="panel_indicator">매체 선택</div>
+        <div id="select_provider_text_container">
+          <input type="text" id="select_provider_text_input" placeholder="매체를 입력하세요.">
+          <div id="search_icon_small"></div>
+        </div>
+        <div id="provider_list_container">
+          <ul id="provider_list"></ul>
+        </div>
+        <div id="provider_select_all"><input id="provider_select_all_checkbox" type="checkbox">전체선택</div>
+        <!-- <div id="provider_button"><p>적용하기</p></div> -->
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <script type="text/javascript" src="script.min.js"></script>
+  
+<div id='info-panel'>
+	<div id="info-panel-header-line" style="width:100%; height:5px; background-color:black;"></div>
+	<div id="container">
+	</div>
+</div>
+</body>
+</html>
+
